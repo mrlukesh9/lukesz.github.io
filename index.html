@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>lukesz.online</title>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666;
+      --accent: #7c7cff;
+      --card: #f3f3f3;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e0e0e;
+        --text: #eaeaea;
+        --muted: #999;
+        --accent: #9d9dff;
+        --card: #1a1a1a;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: auto;
+      padding: 40px 20px 80px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 60px;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 10px 0;
+      color: var(--text);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 20px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .progress {
+      background: #00000020;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      width: 38%;
+      background: var(--accent);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 80px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- SECTION 1 -->
+    <h1>Welcome to lukesz.online</h1>
+    <p class="muted">
+      This website exists because:
+      <br>• I was bored
+      <br>• You were curious
+      <br>• Internet is cheap
+    </p>
+
+    <p>
+      There is no product.<br>
+      There is no motivation.<br>
+      There is no “follow me”.
+    </p>
+
+    <p class="muted">Still scrolling? Interesting choice.</p>
+
+    <!-- SECTION 2 -->
+    <h2>Let’s be honest.</h2>
+    <div class="card">
+      <p>You’re here because:</p>
+      <ul>
+        <li>☑ Curiosity</li>
+        <li>☑ Stalking</li>
+        <li>☑ Misclick</li>
+        <li>☑ You had 7 seconds to waste</li>
+      </ul>
+      <p class="muted">Don’t worry. This is a safe space.</p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2>Fun fact</h2>
+    <div class="card">
+      <p>
+        You will remember this website for
+        <strong>exactly 6 seconds</strong>.
+      </p>
+      <p class="muted">Memory retention loading…</p>
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <h2>Scanning visitor personality…</h2>
+    <div class="card">
+      <ul>
+        <li>✔ 42% curiosity</li>
+        <li>✔ 31% boredom</li>
+        <li>✔ 19% procrastination</li>
+        <li>✔ 8% regret</li>
+      </ul>
+      <p class="muted">
+        Diagnosis: “Not following yet, but mildly impressed.”
+      </p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <h2>Important action</h2>
+    <div class="card center">
+      <button onclick="unlockNothing()">Click here to unlock nothing</button>
+      <p id="nothingText" class="muted"></p>
+    </div>
+
+    <!-- SECTION 6 -->
+    <h2>Final truth</h2>
+    <p>
+      This website will not change your life.
+    </p>
+    <p class="muted">
+      But if you smiled —<br>
+      then it already did something.
+    </p>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Close this tab.<br>
+        But later today, for no reason,<br>
+        you’ll remember <strong>lukesz.online</strong>
+      </p>
+      <p class="muted">
+        People who wasted time here: <span id="counter"></span>
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    function unlockNothing() {
+      document.getElementById("nothingText").innerText =
+        "Congratulations. You unlocked absolutely nothing.";
+    }
+
+    // Fake visitor counter
+    const base = 1200;
+    const random = Math.floor(Math.random() * 300);
+    document.getElementById("counter").innerText = base + random;
+  </script>
+</body>
+</html>
