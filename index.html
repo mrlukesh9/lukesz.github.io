@@ -1,224 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>lukesz.online</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lukesz.online</title>
 
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #666;
-      --accent: #7c7cff;
-      --card: #f3f3f3;
-    }
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #111;
+  --muted: #666;
+  --accent: #7c7cff;
+  --card: #f3f3f3;
+}
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0e0e0e;
-        --text: #eaeaea;
-        --muted: #999;
-        --accent: #9d9dff;
-        --card: #1a1a1a;
-      }
-    }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e0e0e;
+    --text: #eee;
+    --muted: #999;
+    --accent: #9d9dff;
+    --card: #1a1a1a;
+  }
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Ubuntu, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
 
-    .container {
-      max-width: 720px;
-      margin: auto;
-      padding: 40px 20px 80px;
-    }
+.container {
+  max-width: 720px;
+  margin: auto;
+  padding: 40px 20px 80px;
+}
 
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 10px;
-    }
+h1 { font-size: 2.5rem; }
+h2 { margin-top: 70px; }
 
-    h2 {
-      margin-top: 60px;
-      font-size: 1.5rem;
-    }
+p { margin: 10px 0; }
+.muted { color: var(--muted); }
 
-    p {
-      margin: 10px 0;
-      color: var(--text);
-    }
+.card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: 16px;
+  margin-top: 20px;
+  transition: transform 0.3s ease;
+}
 
-    .muted {
-      color: var(--muted);
-    }
+.card:hover {
+  transform: translateY(-3px);
+}
 
-    .card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 14px;
-      margin-top: 20px;
-    }
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
 
-    ul {
-      padding-left: 20px;
-    }
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    li {
-      margin: 8px 0;
-    }
+.progress {
+  background: #00000020;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
 
-    .progress {
-      background: #00000020;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  background: var(--accent);
+  transition: width 2s ease;
+}
 
-    .progress-bar {
-      height: 10px;
-      width: 38%;
-      background: var(--accent);
-    }
+button {
+  padding: 14px 22px;
+  border-radius: 14px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    button {
-      margin-top: 20px;
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: none;
-      background: var(--accent);
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px #00000030;
+}
 
-    button:active {
-      transform: scale(0.97);
-    }
+button:active {
+  transform: scale(0.95);
+}
 
-    .center {
-      text-align: center;
-    }
+.center { text-align: center; }
 
-    footer {
-      margin-top: 80px;
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-align: center;
-    }
-  </style>
+footer {
+  margin-top: 90px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--muted);
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
 
-    <!-- SECTION 1 -->
-    <h1>Welcome to lukesz.online</h1>
-    <p class="muted">
-      This website exists because:
-      <br>• I was bored
-      <br>• You were curious
-      <br>• Internet is cheap
-    </p>
+<div class="container">
 
-    <p>
-      There is no product.<br>
-      There is no motivation.<br>
-      There is no “follow me”.
-    </p>
+  <h1 class="fade">Welcome to lukesz.online</h1>
 
-    <p class="muted">Still scrolling? Interesting choice.</p>
+  <p class="muted fade" id="typing"></p>
 
-    <!-- SECTION 2 -->
-    <h2>Let’s be honest.</h2>
-    <div class="card">
-      <p>You’re here because:</p>
-      <ul>
-        <li>☑ Curiosity</li>
-        <li>☑ Stalking</li>
-        <li>☑ Misclick</li>
-        <li>☑ You had 7 seconds to waste</li>
-      </ul>
-      <p class="muted">Don’t worry. This is a safe space.</p>
-    </div>
+  <p class="fade">
+    There is no product.<br>
+    There is no motivation.<br>
+    There is no “follow me”.
+  </p>
 
-    <!-- SECTION 3 -->
-    <h2>Fun fact</h2>
-    <div class="card">
-      <p>
-        You will remember this website for
-        <strong>exactly 6 seconds</strong>.
-      </p>
-      <p class="muted">Memory retention loading…</p>
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
-    </div>
+  <p class="muted fade">Still scrolling? Interesting choice.</p>
 
-    <!-- SECTION 4 -->
-    <h2>Scanning visitor personality…</h2>
-    <div class="card">
-      <ul>
-        <li>✔ 42% curiosity</li>
-        <li>✔ 31% boredom</li>
-        <li>✔ 19% procrastination</li>
-        <li>✔ 8% regret</li>
-      </ul>
-      <p class="muted">
-        Diagnosis: “Not following yet, but mildly impressed.”
-      </p>
-    </div>
-
-    <!-- SECTION 5 -->
-    <h2>Important action</h2>
-    <div class="card center">
-      <button onclick="unlockNothing()">Click here to unlock nothing</button>
-      <p id="nothingText" class="muted"></p>
-    </div>
-
-    <!-- SECTION 6 -->
-    <h2>Final truth</h2>
-    <p>
-      This website will not change your life.
-    </p>
-    <p class="muted">
-      But if you smiled —<br>
-      then it already did something.
-    </p>
-
-    <!-- FOOTER -->
-    <footer>
-      <p>
-        Close this tab.<br>
-        But later today, for no reason,<br>
-        you’ll remember <strong>lukesz.online</strong>
-      </p>
-      <p class="muted">
-        People who wasted time here: <span id="counter"></span>
-      </p>
-    </footer>
-
+  <h2 class="fade">Let’s be honest</h2>
+  <div class="card fade">
+    <p>You’re here because:</p>
+    <ul>
+      <li>☑ Curiosity</li>
+      <li>☑ Stalking</li>
+      <li>☑ Misclick</li>
+      <li>☑ You had 7 seconds to waste</li>
+    </ul>
   </div>
 
-  <script>
-    function unlockNothing() {
-      document.getElementById("nothingText").innerText =
-        "Congratulations. You unlocked absolutely nothing.";
-    }
+  <h2 class="fade">Fun fact</h2>
+  <div class="card fade">
+    <p>You will remember this website for <strong>exactly 6 seconds</strong>.</p>
+    <p class="muted">Memory retention loading…</p>
+    <div class="progress">
+      <div class="progress-bar" id="bar"></div>
+    </div>
+  </div>
 
-    // Fake visitor counter
-    const base = 1200;
-    const random = Math.floor(Math.random() * 300);
-    document.getElementById("counter").innerText = base + random;
-  </script>
+  <h2 class="fade">Scanning visitor personality…</h2>
+  <div class="card fade">
+    <ul>
+      <li>✔ 42% curiosity</li>
+      <li>✔ 31% boredom</li>
+      <li>✔ 19% procrastination</li>
+      <li>✔ 8% regret</li>
+    </ul>
+    <p class="muted" id="diagnosis"></p>
+  </div>
+
+  <h2 class="fade">Important action</h2>
+  <div class="card center fade">
+    <button onclick="unlockNothing()">Click here to unlock nothing</button>
+    <p id="nothingText" class="muted"></p>
+  </div>
+
+  <h2 class="fade">Final truth</h2>
+  <p class="fade">This website will not change your life.</p>
+  <p class="muted fade">But if you smiled — it already did something.</p>
+
+  <footer class="fade">
+    <p>
+      Close this tab.<br>
+      But later today, for no reason,<br>
+      you’ll remember <strong>lukesz.online</strong>
+    </p>
+    <p class="muted">
+      People who wasted time here: <span id="counter"></span>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+/* Typing Effect */
+const text = "This website exists because I was bored. You were curious. Internet is cheap.";
+let i = 0;
+const typing = document.getElementById("typing");
+
+function type() {
+  if (i < text.length) {
+    typing.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 40);
+  }
+}
+type();
+
+/* Scroll reveal */
+const fades = document.querySelectorAll(".fade");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.2 });
+
+fades.forEach(f => observer.observe(f));
+
+/* Progress bar */
+setTimeout(() => {
+  document.getElementById("bar").style.width = "38%";
+}, 1000);
+
+/* Diagnosis typing */
+setTimeout(() => {
+  document.getElementById("diagnosis").innerText =
+    "Diagnosis: Not following yet, but mildly impressed.";
+}, 2200);
+
+/* Button randomness */
+const responses = [
+  "Congratulations. You unlocked absolutely nothing.",
+  "Still nothing. Please try again.",
+  "Wow. Such effort. Much nothing.",
+  "This button is proud of you."
+];
+
+function unlockNothing() {
+  const r = Math.floor(Math.random() * responses.length);
+  document.getElementById("nothingText").innerText = responses[r];
+}
+
+/* Fake counter */
+document.getElementById("counter").innerText =
+  1200 + Math.floor(Math.random() * 500);
+</script>
+
 </body>
 </html>
