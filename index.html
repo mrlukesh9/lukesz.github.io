@@ -1,27 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>lukesz.online</title>
 
 <style>
 :root {
-  --bg: #ffffff;
-  --text: #111;
-  --muted: #666;
+  --bg: #0b0b0b;
+  --text: #ffffff;
+  --muted: #9a9a9a;
   --accent: #7c7cff;
-  --card: #f3f3f3;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0e0e0e;
-    --text: #eee;
-    --muted: #999;
-    --accent: #9d9dff;
-    --card: #1a1a1a;
-  }
 }
 
 * { box-sizing: border-box; }
@@ -31,213 +21,158 @@ body {
   font-family: system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-.container {
-  max-width: 720px;
-  margin: auto;
-  padding: 40px 20px 80px;
+.screen {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { margin-top: 70px; }
-
-p { margin: 10px 0; }
-.muted { color: var(--muted); }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .card {
-  background: var(--card);
-  padding: 22px;
-  border-radius: 16px;
-  margin-top: 20px;
-  transition: transform 0.3s ease;
+  max-width: 320px;
 }
 
-.card:hover {
-  transform: translateY(-3px);
+h1 {
+  font-size: 2.1rem;
+  margin-bottom: 16px;
 }
 
-.fade {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.progress {
-  background: #00000020;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.progress-bar {
-  height: 10px;
-  width: 0%;
-  background: var(--accent);
-  transition: width 2s ease;
+p {
+  font-size: 1.1rem;
+  color: var(--muted);
 }
 
 button {
-  padding: 14px 22px;
-  border-radius: 14px;
+  margin-top: 24px;
+  padding: 14px 26px;
+  font-size: 1rem;
+  border-radius: 30px;
   border: none;
   background: var(--accent);
   color: white;
-  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px #00000030;
+  transition: transform 0.15s ease;
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
-.center { text-align: center; }
+.progress {
+  height: 6px;
+  width: 100%;
+  background: #ffffff20;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 18px;
+}
 
-footer {
-  margin-top: 90px;
-  font-size: 0.9rem;
-  text-align: center;
-  color: var(--muted);
+.bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 2s ease;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <h1 class="fade">Welcome to lukesz.online</h1>
-
-  <p class="muted fade" id="typing"></p>
-
-  <p class="fade">
-    There is no product.<br>
-    There is no motivation.<br>
-    There is no “follow me”.
-  </p>
-
-  <p class="muted fade">Still scrolling? Interesting choice.</p>
-
-  <h2 class="fade">Let’s be honest</h2>
-  <div class="card fade">
-    <p>You’re here because:</p>
-    <ul>
-      <li>☑ Curiosity</li>
-      <li>☑ Stalking</li>
-      <li>☑ Misclick</li>
-      <li>☑ You had 7 seconds to waste</li>
-    </ul>
+<!-- Screen 1 -->
+<div class="screen" id="s1">
+  <div class="card">
+    <h1>You shouldn’t be here.</h1>
+    <p>This website has no purpose.</p>
+    <button onclick="next(1)">Tap anyway</button>
   </div>
+</div>
 
-  <h2 class="fade">Fun fact</h2>
-  <div class="card fade">
-    <p>You will remember this website for <strong>exactly 6 seconds</strong>.</p>
-    <p class="muted">Memory retention loading…</p>
+<!-- Screen 2 -->
+<div class="screen hidden" id="s2">
+  <div class="card">
+    <h1>Be honest.</h1>
+    <p>You clicked because:</p>
+    <p>👀 Curiosity<br>😴 Boredom<br>🕵️ Stalking</p>
+    <button onclick="next(2)">Fair enough</button>
+  </div>
+</div>
+
+<!-- Screen 3 -->
+<div class="screen hidden" id="s3">
+  <div class="card">
+    <h1>Analyzing you…</h1>
     <div class="progress">
-      <div class="progress-bar" id="bar"></div>
+      <div class="bar" id="bar"></div>
     </div>
+    <p id="scanText" style="margin-top:14px">Please wait</p>
   </div>
+</div>
 
-  <h2 class="fade">Scanning visitor personality…</h2>
-  <div class="card fade">
-    <ul>
-      <li>✔ 42% curiosity</li>
-      <li>✔ 31% boredom</li>
-      <li>✔ 19% procrastination</li>
-      <li>✔ 8% regret</li>
-    </ul>
-    <p class="muted" id="diagnosis"></p>
-  </div>
-
-  <h2 class="fade">Important action</h2>
-  <div class="card center fade">
-    <button onclick="unlockNothing()">Click here to unlock nothing</button>
-    <p id="nothingText" class="muted"></p>
-  </div>
-
-  <h2 class="fade">Final truth</h2>
-  <p class="fade">This website will not change your life.</p>
-  <p class="muted fade">But if you smiled — it already did something.</p>
-
-  <footer class="fade">
+<!-- Screen 4 -->
+<div class="screen hidden" id="s4">
+  <div class="card">
+    <h1>Result</h1>
     <p>
-      Close this tab.<br>
-      But later today, for no reason,<br>
-      you’ll remember <strong>lukesz.online</strong>
+      43% curious<br>
+      32% bored<br>
+      25% pretending this was accidental
     </p>
-    <p class="muted">
-      People who wasted time here: <span id="counter"></span>
-    </p>
-  </footer>
+    <button onclick="next(4)">Continue wasting time</button>
+  </div>
+</div>
 
+<!-- Screen 5 -->
+<div class="screen hidden" id="s5">
+  <div class="card">
+    <h1>Achievement unlocked</h1>
+    <p>You gained absolutely nothing.</p>
+    <button onclick="next(5)">One last thing</button>
+  </div>
+</div>
+
+<!-- Screen 6 -->
+<div class="screen hidden" id="s6">
+  <div class="card">
+    <h1>That’s it.</h1>
+    <p>
+      Close this tab.<br><br>
+      But later today,<br>
+      you’ll randomly remember:
+    </p>
+    <h1>lukesz.online</h1>
+    <p style="margin-top:12px">🙂</p>
+  </div>
 </div>
 
 <script>
-/* Typing Effect */
-const text = "This website exists because I was bored. You were curious. Internet is cheap.";
-let i = 0;
-const typing = document.getElementById("typing");
+function next(n) {
+  document.getElementById("s" + n).classList.add("hidden");
+  const nextScreen = document.getElementById("s" + (n + 1));
+  nextScreen.classList.remove("hidden");
 
-function type() {
-  if (i < text.length) {
-    typing.innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type, 40);
+  if (n === 2) {
+    setTimeout(() => {
+      document.getElementById("bar").style.width = "68%";
+      document.getElementById("scanText").innerText =
+        "Overthinking detected.";
+    }, 300);
   }
 }
-type();
-
-/* Scroll reveal */
-const fades = document.querySelectorAll(".fade");
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.2 });
-
-fades.forEach(f => observer.observe(f));
-
-/* Progress bar */
-setTimeout(() => {
-  document.getElementById("bar").style.width = "38%";
-}, 1000);
-
-/* Diagnosis typing */
-setTimeout(() => {
-  document.getElementById("diagnosis").innerText =
-    "Diagnosis: Not following yet, but mildly impressed.";
-}, 2200);
-
-/* Button randomness */
-const responses = [
-  "Congratulations. You unlocked absolutely nothing.",
-  "Still nothing. Please try again.",
-  "Wow. Such effort. Much nothing.",
-  "This button is proud of you."
-];
-
-function unlockNothing() {
-  const r = Math.floor(Math.random() * responses.length);
-  document.getElementById("nothingText").innerText = responses[r];
-}
-
-/* Fake counter */
-document.getElementById("counter").innerText =
-  1200 + Math.floor(Math.random() * 500);
 </script>
 
 </body>
