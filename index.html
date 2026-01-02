@@ -98,7 +98,7 @@ button:disabled {
 <div class="screen" id="s1">
   <div class="card">
     <h1>You shouldn’t be here.</h1>
-    <p>This website has no purpose.</p>
+    <p>This was supposed to be a normal click.</p>
     <button onclick="go(1, this)">Tap anyway</button>
   </div>
 </div>
@@ -108,7 +108,11 @@ button:disabled {
   <div class="card">
     <h1>Be honest.</h1>
     <p>You clicked because:</p>
-    <p>👀 Curiosity<br>😴 Boredom<br>🕵️ Stalking</p>
+    <p>
+      👀 Link tha, toh click kar diya<br>
+      😴 Thoda break chahiye tha<br>
+      🕵️ Dekhte hain banda kya karta hai
+    </p>
     <button onclick="go(2, this)">Fair enough</button>
   </div>
 </div>
@@ -120,7 +124,9 @@ button:disabled {
     <div class="progress">
       <div class="bar" id="bar"></div>
     </div>
-    <p id="scanText" style="margin-top:14px">Initializing scan…</p>
+    <p id="scanText" style="margin-top:14px">
+      Forming opinions without asking.
+    </p>
   </div>
 </div>
 
@@ -129,9 +135,9 @@ button:disabled {
   <div class="card">
     <h1>Result</h1>
     <p>
-      43% curious<br>
-      32% bored<br>
-      25% pretending this was accidental
+      38% curiosity<br>
+      34% mild interest<br>
+      28% “kaam ka toh nahi lag raha”
     </p>
     <button onclick="go(4, this)">Continue</button>
   </div>
@@ -141,7 +147,10 @@ button:disabled {
 <div class="screen hidden" id="s5">
   <div class="card">
     <h1>Achievement unlocked</h1>
-    <p>You gained absolutely nothing.</p>
+    <p>
+      You found nothing useful.<br>
+      Exactly as promised.
+    </p>
     <button onclick="go(5, this)">One last thing</button>
   </div>
 </div>
@@ -152,11 +161,13 @@ button:disabled {
     <h1>That’s it.</h1>
     <p>
       Close this tab.<br><br>
-      But later today,<br>
-      you’ll randomly remember:
+      But next time you see a random link…<br>
+      you’ll think:
     </p>
     <h1>lukesz.online</h1>
-    <p style="margin-top:12px">🙂</p>
+    <p style="margin-top:12px">
+      Haan, ye wahi hai.
+    </p>
   </div>
 </div>
 
@@ -189,12 +200,12 @@ function go(n, btn) {
 
     setTimeout(() => {
       bar.style.width = "40%";
-      text.innerText = "Overthinking detected…";
+      text.innerText = "Mentally comparing with others…";
     }, 300);
 
     setTimeout(() => {
       bar.style.width = "100%";
-      text.innerText = "Judging silently…";
+      text.innerText = "Deciding: follow karein ya nahi…";
     }, 1300);
 
     setTimeout(() => {
@@ -208,6 +219,9 @@ function go(n, btn) {
     }, 500);
   }
 }
+
+// Easter egg 😄
+console.log("Expectation: kuch interesting hoga. Reality: ye.");
 </script>
 
 </body>
