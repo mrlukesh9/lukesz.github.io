@@ -69,6 +69,11 @@ button:active {
   transform: scale(0.92);
 }
 
+button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .progress {
   height: 6px;
   width: 100%;
@@ -82,7 +87,7 @@ button:active {
   height: 100%;
   width: 0%;
   background: var(--accent);
-  transition: width 2s ease;
+  transition: width 2.2s ease;
 }
 </style>
 </head>
@@ -94,7 +99,7 @@ button:active {
   <div class="card">
     <h1>You shouldn’t be here.</h1>
     <p>This website has no purpose.</p>
-    <button onclick="go(1)">Tap anyway</button>
+    <button onclick="go(1, this)">Tap anyway</button>
   </div>
 </div>
 
@@ -104,7 +109,7 @@ button:active {
     <h1>Be honest.</h1>
     <p>You clicked because:</p>
     <p>👀 Curiosity<br>😴 Boredom<br>🕵️ Stalking</p>
-    <button onclick="go(2)">Fair enough</button>
+    <button onclick="go(2, this)">Fair enough</button>
   </div>
 </div>
 
@@ -115,4 +120,95 @@ button:active {
     <div class="progress">
       <div class="bar" id="bar"></div>
     </div>
-    <p id="scanText" style="margin-top:14px">Please wait</p>
+    <p id="scanText" style="margin-top:14px">Initializing scan…</p>
+  </div>
+</div>
+
+<!-- Screen 4 -->
+<div class="screen hidden" id="s4">
+  <div class="card">
+    <h1>Result</h1>
+    <p>
+      43% curious<br>
+      32% bored<br>
+      25% pretending this was accidental
+    </p>
+    <button onclick="go(4, this)">Continue</button>
+  </div>
+</div>
+
+<!-- Screen 5 -->
+<div class="screen hidden" id="s5">
+  <div class="card">
+    <h1>Achievement unlocked</h1>
+    <p>You gained absolutely nothing.</p>
+    <button onclick="go(5, this)">One last thing</button>
+  </div>
+</div>
+
+<!-- Screen 6 -->
+<div class="screen hidden" id="s6">
+  <div class="card">
+    <h1>That’s it.</h1>
+    <p>
+      Close this tab.<br><br>
+      But later today,<br>
+      you’ll randomly remember:
+    </p>
+    <h1>lukesz.online</h1>
+    <p style="margin-top:12px">🙂</p>
+  </div>
+</div>
+
+<script>
+let locked = false;
+
+function vibrate() {
+  if (navigator.vibrate) navigator.vibrate(30);
+}
+
+function go(n, btn) {
+  if (locked) return;
+  locked = true;
+
+  if (btn) btn.disabled = true;
+  vibrate();
+
+  const current = document.getElementById("s" + n);
+  const next = document.getElementById("s" + (n + 1));
+
+  if (!current || !next) return;
+
+  current.classList.add("hidden");
+  next.classList.remove("hidden");
+
+  // Analyzer logic
+  if (n === 2) {
+    const bar = document.getElementById("bar");
+    const text = document.getElementById("scanText");
+
+    setTimeout(() => {
+      bar.style.width = "40%";
+      text.innerText = "Overthinking detected…";
+    }, 300);
+
+    setTimeout(() => {
+      bar.style.width = "100%";
+      text.innerText = "Judging silently…";
+    }, 1300);
+
+    setTimeout(() => {
+      document.getElementById("s3").classList.add("hidden");
+      document.getElementById("s4").classList.remove("hidden");
+      locked = false;
+    }, 2600);
+  } else {
+    setTimeout(() => {
+      locked = false;
+    }, 500);
+  }
+}
+</script>
+
+</body>
+</html>
